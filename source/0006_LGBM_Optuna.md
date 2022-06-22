@@ -23,6 +23,7 @@ def sample_w(y_train, multip=1):
 
 # 損失関数に重みづけするLGBMモデル作成
 # OptunaのLightGBMTunerCV使用
+# sklearnのAPIは使わない
 def lgb_weight(X_train, y_train, multip=1):#, X_valid, y_valid, X_test):
     params = {'task': 'train',
               'boosting_type': 'gbdt',
