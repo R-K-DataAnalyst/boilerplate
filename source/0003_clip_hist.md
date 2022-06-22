@@ -5,8 +5,8 @@ fig=plt.figure(figsize=(18,14))
 dim=len(plot_cols)
 for i, col in tqdm(enumerate(plot_cols)):
     # クリッピング時のminmax取得
-    vmin=df01[col].clip(df01[col].quantile(0.0), df01[col].quantile(0.9999)).min()
-    vmax=df01[col].clip(df01[col].quantile(0.0), df01[col].quantile(0.9999)).max()
+    vmin=df01[col].clip(df01[col].quantile(0.0), df01[col].quantile(0.99)).min()
+    vmax=df01[col].clip(df01[col].quantile(0.0), df01[col].quantile(0.99)).max()
     # ヒストグラムのwidth決める
     if vmax>=10000:
         width=round(vmax/50)
@@ -57,19 +57,19 @@ def plots_bar(df02, obj_col, key_col, xlabel='', flg=0):
     tmp = pd.merge(tmp, tmp3, on=[key_col], how='left')
 
     fig=plt.figure(figsize=(15,15))
-    ax=plt.subplot(3,3,1)
+    ax=plt.subplot(3,1,1)
     ax.bar(tmp[key_col], tmp['col01'],color='blue',alpha=0.6)
     ax.set_xlabel(xlabel)
     ax.set_ylabel('col01')
     plt.setp(ax.get_xticklabels(), rotation=30, ha='right')
 
-    ax=plt.subplot(3,3,2)
+    ax=plt.subplot(3,1,2)
     ax.bar(tmp[key_col], tmp['col02'],color='blue',alpha=0.6)
     ax.set_xlabel(xlabel)
     ax.set_ylabel('col02')
     plt.setp(ax.get_xticklabels(), rotation=30, ha='right')
 
-    ax=plt.subplot(3,3,3)
+    ax=plt.subplot(3,1,3)
     ax.bar(tmp[key_col], tmp['col03'],color='blue',alpha=0.6)
     ax.set_xlabel(xlabel)
     ax.set_ylabel('col03')
