@@ -1,4 +1,4 @@
-# clippingしてhistplotなど可視化の備忘録
+# clippingしてhistplot, 箱ひげ, 円グラフなど可視化の備忘録
 普通にヒストグラムを書いた時に、外れ値のせいで横軸のレンジが広くなりすぎて、左隅に1本棒が立っているだけの意味のない可視化になる時が多い。
 
 それを避けるために、クリッピングで数値丸めてからヒストグラム書くと、意味のある可視化になりやすい。
@@ -45,8 +45,9 @@ for i, col in tqdm(enumerate(plot_cols)):
     ax.legend(h1+h2, l1+l2, loc='upper right', fontsize=10)
 plt.tight_layout()
 plt.show()
-
-
+```
+ただの棒グラフ作成用。
+```python
 # 棒グラフ作成
 def plots_bar(df02, obj_col, key_col, xlabel='', flg=0):
     # 棒グラフにする数値を集計
@@ -80,7 +81,11 @@ def plots_bar(df02, obj_col, key_col, xlabel='', flg=0):
 
     plt.tight_layout()
     plt.show()
+```
+箱ひげ図作成。ただし、外れ値が大きい場合、箱ひげがつぶれて見えないので、外れ値は無しにする。
 
+その代わり、stripplotも同時にplotして外れ値まだ可視化する。
+```python
 # 箱ひげとstripplot作成
 def plots_box_strip(df02, df_obj, obj_col, col, key_col, xlabel=''):
     tmp1 = df02.copy()
@@ -117,5 +122,23 @@ def plots_box_strip(df02, df_obj, obj_col, col, key_col, xlabel=''):
     plt.setp(ax.get_xticklabels(), rotation=30, ha='right')
 
     plt.tight_layout()
+    plt.show()
+```
+ただの円グラフ作成関数。
+```python
+# 円グラフ作成関数
+def pct_abs(pct, raw_data):
+    absolute = int(np.sum(raw_data)*(pct/100.))
+    return '{:d}\n({:.0f}%)'.format(absolute, pct) if pct > 5 else ''
+
+def plot_chart(y_km):
+    km_label=pd.DataFrame(y_km).rename(columns={0:'cluster'})
+    km_label['val']=1
+    km_label=km_label.groupby('cluster')[['val']].count().reset_index()
+    fig=plt.figure(figsize=(5,5))
+    ax=plt.subplot(1,1,1)
+    ax.pie(km_label['val'],labels=km_label['cluster'], autopct=lambda p: pct_abs(p, km_label['val']))#, autopct="%1.1f%%")
+    ax.axis('equal')
+    ax.set_title('Cluster Chart (ALL Records:{})'.format(km_label['val'].sum()),fontsize=14)
     plt.show()
 ```
