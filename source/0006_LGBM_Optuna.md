@@ -1,4 +1,7 @@
 # OptunaのLightGBMTunerCV備忘録
+意外にLGBMのOptuna最適化をしたことがないことに気づいたのでコードを書いた。
+
+不均衡データに対して実施したので、損失関数に重みづけしているようなかコードになっている。
 ```python
 # 損失関数に重みづけ
 def sample_w(y_train, multip=1):
