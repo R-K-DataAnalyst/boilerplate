@@ -1,4 +1,9 @@
 # dockerの備忘録
+dockerの基本的な使い方参考のまとめ。
+
+docker desktopは有償化したのでdocker engineを使用した方がいい。
+
+docker engineはWindowsの場合、WSL上で使う。
 ## dockerでpython環境つくるためのTips
 ### 参考サイト
 DockerでPython実行環境を作ってみる
