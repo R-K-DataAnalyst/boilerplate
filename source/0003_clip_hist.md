@@ -1,4 +1,4 @@
-# clippingしてhistplot, 箱ひげ, 円グラフなど可視化の備忘録
+# いろいろ可視化の備忘録
 普通にヒストグラムを書いた時に、外れ値のせいで横軸のレンジが広くなりすぎて、左隅に1本棒が立っているだけの意味のない可視化になる時が多い。
 
 それを避けるために、クリッピングで数値丸めてからヒストグラム書くと、意味のある可視化になりやすい。
@@ -46,7 +46,73 @@ for i, col in tqdm(enumerate(plot_cols)):
 plt.tight_layout()
 plt.show()
 ```
-ただの棒グラフ作成用。
+回帰予測の時の、実測値と予測値の散布図作成関数。
+
+実測値±rateの割合と実測値±small_thresholdの範囲に網掛けして、範囲内のサンプル数もカウントする。
+```python
+def obs_pred_plot(zissoku, yosoku# zissoku, yosoku：numpy array
+                  , rate=0.1, small_threshold=5, model_name=''):
+    # 閾値範囲を示すarray
+    zissoku_lower = zissoku*(1-rate)
+    zissoku_upper = zissoku*(1+rate)
+    zissoku_lower_small = zissoku-small_threshold
+    zissoku_upper_small = zissoku+small_threshold
+
+    # 閾値範囲内だけのarrayのIndex
+    inrange_ind = np.where(((yosoku>=zissoku_lower)&(yosoku<=zissoku_upper))|((yosoku>=zissoku_lower_small)&(yosoku<=zissoku_upper_small)))[0]
+    
+    ## 精度指標計算(一般的なものと、こちらで定義したものの2種)
+    # 一般的なもの
+    r2 = sklearn.metrics.r2_score(zissoku, yosoku) # r2 score
+    rmse = np.sqrt(sklearn.metrics.mean_squared_error(zissoku, yosoku)) # rmse
+    mape = np.mean(np.abs((yosoku - zissoku) / (zissoku+0.0001))) # mape
+    # こちらで定義したもの
+    good_ratio = (inrange_ind.shape[0])/(len(yosoku)) # 予測結果が閾値内に入る割合
+    print('R2 score: {:.3f}'.format(r2))
+    print('RMSE: {:.3f}'.format(rmse))
+    print('MAPE: {:.3f}'.format(mape))
+    print('Inside threshold ratio: {:.3f}'.format(good_ratio))
+    
+    # グラフの上限指定
+    lim=max(zissoku.max(), yosoku.max())
+    # グラフの上限指定
+    limmin=min(zissoku.min(), yosoku.min())
+    # 理想線引くためのlinear
+    linear=np.linspace(limmin,lim,11)
+    # figsize
+    fig = plt.figure(figsize=(8,8))
+    ax=plt.subplot(1,1,1)
+    # 散布図（すべて）
+    ax.scatter(zissoku, yosoku, alpha=0.5, label='Outside threshold')
+    # 散布図（範囲内）
+    ax.scatter(zissoku[inrange_ind]
+               , yosoku[inrange_ind], edgecolors="k", alpha=1.
+               , label='Inside threshold')
+    # 範囲を可視化
+    ax.fill_between(linear,linear*(1-rate),linear*(1+rate)
+                    , facecolor='r',  alpha=0.3
+                    , label='Threshold range(ratio):±{:.3f}'.format(rate))
+    # 範囲を可視化（実測値が小さいところは±%の範囲が極小なので±実数で判断）
+    ax.fill_between(linear, linear-small_threshold, linear+small_threshold
+                    , facecolor='g', alpha=0.3
+                    , label='Threshold range(small range):±{:.3f}'.format(small_threshold))
+    # 理想的な予測結果の線を可視化
+    ax.plot(linear,linear, label='Perfecrt predict line', ls='dotted', c='k', lw=3.)
+    # 各指標を記す
+    ax.annotate("R2 score: {:.3f}".format(r2), xy = (lim*0.5, lim*0.15), size = 12, color = "k")
+    ax.annotate('RMSE: {:.3f}'.format(rmse), xy = (lim*0.5, lim*0.11), size = 12, color = "k")
+    ax.annotate('MAPE: {:.3f}'.format(mape), xy = (lim*0.5, lim*0.07), size = 12, color = "k")
+    ax.annotate('Inside threshold ratio: {:.3f}'.format(good_ratio), xy = (lim*0.5, lim*0.03), size = 12, color = "k")
+
+    ax.legend()
+    ax.set_xlim(limmin,lim)
+    ax.set_ylim(limmin,lim)
+    ax.set_xlabel('observation')
+    ax.set_ylabel('prediction')
+    ax.set_title(model_name+' Observation-Prediction plot')
+    plt.show()
+```
+ただの棒グラフ作成用関数。
 ```python
 # 棒グラフ作成
 def plots_bar(df02, obj_col, key_col, xlabel='', flg=0):
@@ -82,7 +148,7 @@ def plots_bar(df02, obj_col, key_col, xlabel='', flg=0):
     plt.tight_layout()
     plt.show()
 ```
-箱ひげ図作成。ただし、外れ値が大きい場合、箱ひげがつぶれて見えないので、外れ値は無しにする。
+箱ひげ図。ただし、外れ値が大きい場合、箱ひげがつぶれて見えないので、外れ値は無しにする。
 
 その代わり、stripplotも同時にplotして外れ値まだ可視化する。
 ```python
