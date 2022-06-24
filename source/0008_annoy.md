@@ -6,7 +6,8 @@
 pip installでWindowsの場合、エラーが出ることがある。
 <br>
 その時はエラー文を見たらわかるがVisual C++ Build Toolsが必要なのでインストールする。
-
+<br>
+sklearnのknnより圧倒的に早い。
 ```python
 # Annoyを使った近傍探索モデル作成
 # ユークリッド距離で探索するモデルを用意する
