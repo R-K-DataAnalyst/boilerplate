@@ -1,5 +1,11 @@
 # 2クラス分類評価備忘録
+2クラス分類の表評価アプローチ。
 
+混同行列で分類精度を見られる。
+
+Calibration Curveで分類の予測確率の精度を見られる。
+
+PR curveでPR-AUCを計算して不均衡データの精度指標としたりするなど。
 ```python
 # 混同行列
 def print_cmx(y_true, y_pred):
