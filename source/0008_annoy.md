@@ -1,7 +1,10 @@
 # Annoyを使った近似近傍探索モデルの備忘録
 近似近傍探索モデル作成できるパッケージAnnoyの使い方。
+<br>
 インストールはAnacondaならconda installで一発。
+<br>
 pip installでWindowsの場合、エラーが出ることがある。
+<br>
 その時はエラー文を見たらわかるがVisual C++ Build Toolsが必要なのでインストールする。
 
 ```python
