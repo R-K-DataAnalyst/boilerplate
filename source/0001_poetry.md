@@ -1,4 +1,7 @@
 # poetryの備忘録
+Anaconda有償化で社内使用NGの場合、conda仮想環境も使えない。
+<br>
+conda以外いろいろなアプローチがあるけど、pyenv+poetryという選択もある。
 ## pyenv+poetry+pipで仮想環境つくるためのTips
 ### 参考URL
 Poetryをサクッと使い始めてみる
