@@ -1,6 +1,5 @@
-
 # mlflowの備忘録
-mlflowからpickleとして保存したモデルをLoad。
+mlflowにpickleとして保存したモデルをLoadする方法。
 <br>
 experiment_nameをもとにexperiment_idを取得して、取得したexperiment_idのrun_ind番目のrun_idを取得して、取得したrun_idに保存しているpickleファイルをロードする。
 ```python
@@ -19,7 +18,7 @@ def load_model_from_mlflow(obj_col, mlflow_dir='mlruns', run_ind=0, mlflow_exper
     return model
 ```
 
-mlflowの既存のexperimentのrunに記録を追記。
+mlflowの既存のexperimentのrunに記録を追記する方法。
 ```python
 ### mlflowに記録を追記 ###
 mlflow.set_experiment(mlflow_experiment_name)# 実験の名前
