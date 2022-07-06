@@ -4,7 +4,9 @@
 
 ※インストールしているMecabはC:\Program Files\MeCab\binのPath通しておく
 
-Neologd辞書をダウンロード。（ https://github.com/neologd/mecab-ipadic-neologd/tree/master/seed ）
+Neologd辞書をダウンロード。
+
+（ https://github.com/neologd/mecab-ipadic-neologd/tree/master/seed ）
 
 辞書をすべて解凍。（batファイル作成した）
 
