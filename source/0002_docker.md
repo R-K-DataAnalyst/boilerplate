@@ -193,7 +193,7 @@ RUN pip install -r requirements.txt
 <br>
 <br>
 docker-compose.yml
-```
+```Dockerfile
 version: '3'
 services:
   python3:
