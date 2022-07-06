@@ -10,11 +10,11 @@ Neologd辞書をダウンロード。（ https://github.com/neologd/mecab-ipadic
 
 mecab-dict-indexコマンドで、すべてのcsvからdicファイル作る。（batファイル作成した）
 
-![dicdir](https://github.com/R-K-DataAnalyst/boilerplate/blob/master/source/fig/dicdir.png)
-
 C:\Program Files\MeCab\dic内にNEologdフォルダをmkdir。
 
 NEologdフォルダにdicファイルを移動もしくはコピー。
+
+![dicdir](https://github.com/R-K-DataAnalyst/boilerplate/blob/master/source/fig/dicdir.png)
 
 mecabrcを編集して、すべてのdicファイルを登録。
 
