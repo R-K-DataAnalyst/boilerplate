@@ -164,7 +164,7 @@ bash：対話形式のbashシェルを起動してコマンドの入力を受け
 sudo docker exec -it <container-name> bash
 <br>
 <br>
-"""Dockerfile
+```Dockerfile
 FROM python:3.8
 USER root
 
@@ -188,10 +188,10 @@ RUN pip install --upgrade pip
 RUN pip install --upgrade setuptools
 RUN pip install jupyter
 RUN pip install -r requirements.txt
-"""
+```
 <br>
 <br>
-"""docker-compose.yml
+```docker-compose.yml
 version: '3'
 services:
   python3:
@@ -202,4 +202,4 @@ services:
     tty: true
     volumes:
       - /volumes_dir:/root/volume_dir
-"""
+```
