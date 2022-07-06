@@ -164,7 +164,7 @@ bash：対話形式のbashシェルを起動してコマンドの入力を受け
 sudo docker exec -it <container-name> bash
 <br>
 <br>
-
+# Dockerfikeやdocker-compose.yml
 Dockerfile
 
 ```Dockerfile
@@ -209,3 +209,5 @@ services:
     volumes:
       - /volumes_dir:/root/volume_dir
 ```
+
+![docker_files](https://github.com/R-K-DataAnalyst/boilerplate/blob/master/source/fig/docker_files.png)
