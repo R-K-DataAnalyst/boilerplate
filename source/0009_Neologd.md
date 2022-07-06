@@ -47,3 +47,13 @@ for %%A in (*.csv) do (
 )
 pause
 ```
+<br>
+<br>
+mecab-dict-indexのoption
+
+```
+-d DIR: システム辞書があるディレクトリ
+-u FILE: FILE というユーザファイルを作成
+-f charset: CSVの文字コード
+-t charset: バイナリ辞書の文字コード
+```
