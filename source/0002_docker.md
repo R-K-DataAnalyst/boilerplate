@@ -164,7 +164,7 @@ bash：対話形式のbashシェルを起動してコマンドの入力を受け
 sudo docker exec -it <container-name> bash
 <br>
 <br>
-# Dockerfikeやdocker-compose.yml
+
 Dockerfile
 
 ```Dockerfile
@@ -209,5 +209,7 @@ services:
     volumes:
       - /volumes_dir:/root/volume_dir
 ```
+
+Dockerfikeやdocker-compose.ymlを置いている場所にrequirements.txtなども置いておく。
 
 ![docker_files](0002_docker/docker_files.png)
