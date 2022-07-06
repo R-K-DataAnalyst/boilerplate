@@ -18,7 +18,7 @@ NEologdフォルダにdicファイルを移動もしくはコピー。
 
 mecabrcを編集して、すべてのdicファイルを登録。
 
-![dicdir](https://github.com/R-K-DataAnalyst/boilerplate/tree/master/source/fig/mecabrc_fig.png)
+![mecabrc_fig](https://github.com/R-K-DataAnalyst/boilerplate/tree/master/source/fig/mecabrc_fig.png)
 <br>
 <br>
 辞書をすべて解凍するbatファイル
