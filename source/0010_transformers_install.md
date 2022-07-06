@@ -4,8 +4,6 @@
 
 ![pytorch_install](fig/pytorch_install.png)
 
-<img src="fig/pytorch_install.png" alt="pytorch_install" title="pytorch_install">
-
 また、日本語でtransformersを使う場合、fugashiやipadicが必要。
 
 なので、pytorch, transformersをインストールするときは以下を実行。
