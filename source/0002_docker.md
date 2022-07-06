@@ -162,3 +162,44 @@ sudo docker stop <id>
 bash：対話形式のbashシェルを起動してコマンドの入力を受け付ける状態
 <br>
 sudo docker exec -it <container-name> bash
+<br>
+<br>
+"""Dockerfile
+FROM python:3.8
+USER root
+
+RUN apt-get update
+RUN apt-get -y install locales && \
+    localedef -f UTF-8 -i ja_JP ja_JP.UTF-8
+
+ENV LANG ja_JP.UTF-8
+ENV LANGUAGE ja_JP:ja
+ENV LC_ALL ja_JP.UTF-8
+ENV TZ JST-9
+ENV TERM xterm
+
+RUN apt-get install -y vim less
+RUN apt-get install -y --no-install-recommends graphviz
+
+RUN mkdir -p /root/XXXX
+COPY requirements.txt /root/XXXX
+WORKDIR /root/XXXX
+RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools
+RUN pip install jupyter
+RUN pip install -r requirements.txt
+"""
+<br>
+<br>
+"""docker-compose.yml
+version: '3'
+services:
+  python3:
+    restart: always
+    build: .
+    container_name: 'XXXX'
+    working_dir: /root/XXXX
+    tty: true
+    volumes:
+      - /volumes_dir:/root/volume_dir
+"""
