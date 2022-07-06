@@ -193,7 +193,7 @@ RUN pip install -r requirements.txt
 <br>
 <br>
 docker-compose.yml
-```Dockerfile
+`
 version: '3'
 services:
   python3:
@@ -204,4 +204,4 @@ services:
     tty: true
     volumes:
       - /volumes_dir:/root/volume_dir
-```
+`
