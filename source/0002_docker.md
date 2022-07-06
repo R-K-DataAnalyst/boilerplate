@@ -166,6 +166,7 @@ sudo docker exec -it <container-name> bash
 <br>
 
 Dockerfile
+
 ```Dockerfile
 FROM python:3.8
 USER root
@@ -195,6 +196,7 @@ RUN pip install -r requirements.txt
 <br>
 <br>
 docker-compose.yml
+
 ```
 version: '3'
 services:
