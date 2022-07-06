@@ -210,4 +210,4 @@ services:
       - /volumes_dir:/root/volume_dir
 ```
 
-![docker_files](https://github.com/R-K-DataAnalyst/boilerplate/blob/master/source/fig/docker_files.png)
+![docker_files](https://github.com/R-K-DataAnalyst/boilerplate/blob/master/source/0002_docker/docker_files.png)
