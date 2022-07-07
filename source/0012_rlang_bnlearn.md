@@ -1,5 +1,9 @@
 # Rでデータハンドリング & ベイジアンネットワーク備忘録
+参考：
 
+https://qiita.com/hrkz_szk/items/a213c2c4ba823cbf78f6
+<br>
+<br>
 データ読み込み。
 ```r
 library(DiagrammeR)
