@@ -25,7 +25,7 @@ datacsv
 
 数値の列をビニングして新しい列として追加。
 ```r
-data=datacsv[,2:21]  # Rは①スタート data.loc[:,1:20]
+data=datacsv[,2:21]  # Rは1スタート data.loc[:,1:20]
 colnames(data)  # data.columns
 
 data %>% dplyr::summarise(max=max(tenure), min=min(tenure))  # data[['tenure']].agg(['min', 'max'])
@@ -100,7 +100,7 @@ avg.X_train = averaged.network(str.X_train)
 strength.plot(avg.X_train, str.X_train, shape = "ellipse")
 graphviz.plot(avg.X_train, layout = "dot", shape = "rectangle")
 par(mfrow = c(1,2))  # plt.subplot(1,2,i)
-graphviz.compare(avg.X_train, net.estimated, shape = "ellipse", main = c("averaged DAG", "single DAG"))
+graphviz.compare(avg.X_train, net.estimated, shape = "ellipse", main = c("Boot Strength", "Hill Climbing"))  # 赤線が右のグラフのみにある円弧を、青線が左のグラフにのみある円弧
 ```
 ![0012_08](0012_rlang_bnlearn/0012_08.png)
 ![0012_09](0012_rlang_bnlearn/0012_09.png)
