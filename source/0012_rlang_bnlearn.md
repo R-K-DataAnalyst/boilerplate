@@ -108,4 +108,4 @@ graphviz.compare(avg.X_train, net.estimated, shape = "ellipse", main = c("Boot S
 ```
 ![0012_08](0012_rlang_bnlearn/0012_08.png)
 ![0012_09](0012_rlang_bnlearn/0012_09.png)
-![0012_10](0012_rlang_bnlearn/0012_10.png)
+![0012_11](0012_rlang_bnlearn/0012_11.png)
