@@ -11,6 +11,8 @@ https://plotly.com/python/parallel-categories-diagram/
 
 データ加工してクラスタリング。
 
+（データ：kaggleの「eCommerce purchase history from electronics store」データ(出典:https://rees46.com/)）
+
 ```python
 import pandas as pd
 import matplotlib.pyplot as plt
