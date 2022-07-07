@@ -90,9 +90,7 @@ df_n.head()
 
 ![sankey03](0013_sankey/sankey03.png)
 
-index:user_id, columns:month, values:クラスタ番号のデータ作成
-
-サンキーダイヤグラムで可視化するデータ。
+index:user_id, columns:month, values:クラスタ番号のデータ作成。これがサンキーダイヤグラムで可視化するデータ。
 
 ![sankey04](0013_sankey/sankey04.png)
 <br>
