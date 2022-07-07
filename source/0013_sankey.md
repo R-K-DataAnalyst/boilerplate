@@ -92,6 +92,8 @@ df_n.head()
 
 index:user_id, columns:month, values:クラスタ番号のデータ作成。これがサンキーダイヤグラムで可視化するデータ。
 
+（注：すべての月にトランザクションがあるユーザーに絞ったので行数(ユーザー数)は118と少ない）
+
 ![sankey04](0013_sankey/sankey04.png)
 <br>
 <br>
