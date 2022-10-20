@@ -83,4 +83,25 @@ def cv_model_output(models, X_test):
         preds.append(pred)
     pred = np.mean(np.array(preds), axis=0)
     return pred
+
+# いろいろな重みでモデルを作る
+def main():
+    tuners = {}
+    scores = {}
+    multips = {}
+    for i, num in enumerate(np.linspace(0.1,0.5,4)):# 重みのパラメータ（multip=1のときbalanced weightになる）
+        print(num)
+        tuner_cv = lgb_weight(X_train, y_train, multip=num)# （multip=1のときbalanced weightになる）
+        tuners[i] = tuner_cv
+        scores[i] = tuner_cv.best_score
+        multips[i] = num
+
+    # 各重みの時の評価
+    print(multips)
+    print(scores)
+    for mdl, w in zip(list(tuners.values()), list(multips.values())):
+        model = mdl.get_best_booster()
+        model = model.boosters
+        with open(os.path.join(MODELDIR, 'lgbm_weight'+str(np.round(w,2))+'.pkl'), 'wb') as web:
+            pickle.dump(model , web)
 ```
