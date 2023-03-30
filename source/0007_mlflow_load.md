@@ -47,9 +47,14 @@ with mlflow.start_run(run_id=run_id):
 ・runの情報取ってくるlist_run_infosはsearch_runsに変更
 
 ```python
-# × 
+# experimentsリスト取得 × 
+tracking.list_experiments()
+# experimentsリスト取得 〇
+tracking.search_experiments()
+
+# run_id取得 × 
 run_id = tracking.list_run_infos(experiments_id, run_view_type=ViewType.ACTIVE_ONLY, order_by=["attribute.start_time DESC"])[run_index].run_id
-# 〇
+# run_id取得 〇
 run_id = tracking.search_runs(experiments_id, run_view_type=ViewType.ACTIVE_ONLY, order_by=["attribute.start_time DESC"])[run_index].to_dictionary()['info']['run_id']
 ```
 
