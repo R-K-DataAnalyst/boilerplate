@@ -45,8 +45,13 @@ with mlflow.start_run(run_id=run_id):
 ・実験のリスト取ってくるlist_experimentsをsearch_experimentsに変更
 
 ・runの情報取ってくるlist_run_infosはsearch_runsに変更
-　→× tracking.list_run_infos(experiments_id, run_view_type=ViewType.ACTIVE_ONLY, order_by=["attribute.start_time DESC"])[run_index].run_id
-　→〇 tracking.search_runs(experiments_id, run_view_type=ViewType.ACTIVE_ONLY, order_by=["attribute.start_time DESC"])[run_index].to_dictionary()['info']['run_id']
+
+```python
+# × 
+run_id = tracking.list_run_infos(experiments_id, run_view_type=ViewType.ACTIVE_ONLY, order_by=["attribute.start_time DESC"])[run_index].run_id
+# 〇
+run_id = tracking.search_runs(experiments_id, run_view_type=ViewType.ACTIVE_ONLY, order_by=["attribute.start_time DESC"])[run_index].to_dictionary()['info']['run_id']
+```
 
 しかしver.2.2.2の問題点として、log_paramには500文字しか入らなくなったので、長い文字列のlogができない。
 
