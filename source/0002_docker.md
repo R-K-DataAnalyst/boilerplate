@@ -116,11 +116,6 @@ https://pocke.hatenablog.com/entry/2014/10/26/145646
 http://weble.org/2011/01/21/vim-source-vimrc
 <br>
 <br>
-jupyter labをリモートから使う
-<br>
-https://qiita.com/RayDoe/items/e1ec21c63a15adb1a061
-<br>
-<br>
 ## コマンド
 #docker imageの検索
 <br>
