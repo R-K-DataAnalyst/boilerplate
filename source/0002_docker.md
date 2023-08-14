@@ -64,7 +64,43 @@ https://qiita.com/yuta-ushijima/items/d3d98177e1b28f736f04
 コンテナに入りたい？それ docker exec でできるよ
 <br>
 https://qiita.com/yosisa/items/a5670e4da3ff22e9411a
-
+<br>
+<br>
+DockerでJupyterLab環境を作る
+<br>
+https://qiita.com/plumfield56/items/335cad3b58afe55f6529
+<br>
+<br>
+dockerで立ち上げたアプリケーションにアクセスできない
+<br>
+https://qiita.com/yukofeb/items/0e6c60f3dd54ae589b41
+<br>
+<br>
+Docker上でJupyter Notebookを使用しようとしてハマったときの対処
+<br>
+https://qiita.com/watyanabe164/items/64b8be31cd1c7c7940d3
+<br>
+<br>
+Dockerでlocalhostが立たない！そんな時はここをみて！
+<br>
+https://qiita.com/wangqijiangjun/items/54a949cd140b61dc7763
+<br>
+<br>
+docker上でjupyter-notebookを使用する方法
+<br>
+https://qiita.com/ricrowl/items/bc178a184a300b22e5e5
+<br>
+<br>
+Dockerコンテナの内部IPアドレスを確認する方法
+<br>
+https://qiita.com/ponsuke0531/items/7e8e5081993a30afdc4a
+<br>
+<br>
+jupyter labをリモートから使う
+<br>
+https://qiita.com/RayDoe/items/e1ec21c63a15adb1a061
+<br>
+<br>
 ## コマンド
 #docker imageの検索
 <br>
