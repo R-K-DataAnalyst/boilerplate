@@ -121,6 +121,15 @@ http://weble.org/2011/01/21/vim-source-vimrc
 https://www.hobby-happymylife.com/setup/docker_package_save/
 <br>
 <br>
+(miniconda入れる場合)miniconda+conda-forgeでの開発環境をDockerでそろえる
+<br>
+https://qiita.com/kimisyo/items/66db9c9db94751b8572b
+<br>
+(miniconda入れる場合)Dockerfileでconda activateする方法
+<br>
+https://note.yu9824.com/howto/2021/09/04/docker-conda-activate.html
+<br>
+<br>
 日本語フォント入れる
 <br>
 ```apt-get install -y fonts-ipaexfont```
