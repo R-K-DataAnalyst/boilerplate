@@ -116,6 +116,16 @@ https://pocke.hatenablog.com/entry/2014/10/26/145646
 http://weble.org/2011/01/21/vim-source-vimrc
 <br>
 <br>
+コンテナ上でのパッケージ更新と保存方法
+<br>
+https://www.hobby-happymylife.com/setup/docker_package_save/
+<br>
+<br>
+日本語フォント入れる
+<br>
+```apt-get install -y fonts-ipaexfont```
+<br>
+<br>
 ## コマンド
 #docker imageの検索
 <br>
