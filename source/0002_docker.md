@@ -101,6 +101,26 @@ jupyter labをリモートから使う
 https://qiita.com/RayDoe/items/e1ec21c63a15adb1a061
 <br>
 <br>
+Vimでクリップボードからのペーストを可能にする
+<br>
+https://sy-base.com/myrobotics/vim/vim_use_clipboard/
+<br>
+<br>
+vimでクリップボード連携を有効にした話
+<br>
+https://pocke.hatenablog.com/entry/2014/10/26/145646
+<br>
+<br>
+.vimrc に変更を加えた場合 Vim の再起動をせずに source ~/.vimrc で再読込みすることができる
+<br>
+http://weble.org/2011/01/21/vim-source-vimrc
+<br>
+<br>
+jupyter labをリモートから使う
+<br>
+https://qiita.com/RayDoe/items/e1ec21c63a15adb1a061
+<br>
+<br>
 ## コマンド
 #docker imageの検索
 <br>
