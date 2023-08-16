@@ -238,11 +238,11 @@ sudo docker exec -it <container-name> bash
 Dockerfile
 
 ```Dockerfile
-FROM python:3.8
+FROM python:3.10
 USER root
 
-RUN apt-get update
-RUN apt-get -y install locales && \
+RUN apt update
+RUN apt -y install locales && \
     localedef -f UTF-8 -i ja_JP ja_JP.UTF-8
 
 ENV LANG ja_JP.UTF-8
@@ -251,16 +251,33 @@ ENV LC_ALL ja_JP.UTF-8
 ENV TZ JST-9
 ENV TERM xterm
 
-RUN apt-get install -y vim less
-RUN apt-get install -y --no-install-recommends graphviz
+RUN apt install -y vim less
+RUN apt install -y --no-install-recommends graphviz
+RUN apt install -y fonts-ipaexfont
+# vim install and config
+RUN apt install -y vim-gtk3
+RUN touch ~/.vimrc
+RUN echo 'set clipboard&' >> ~/.vimrc
+RUN echo 'set clipboard^=unnamedplus' >> ~/.vimrc
+RUN ["/bin/bash", "-c", "source ~/.vimrc"]
 
-RUN mkdir -p /root/XXXX
-COPY requirements.txt /root/XXXX
-WORKDIR /root/XXXX
+# for pymc
+RUN apt install libblas-dev -y
+
+RUN mkdir -p /root/work
+COPY requirements.txt /root/work
+WORKDIR /root/work
+
 RUN pip install --upgrade pip
 RUN pip install --upgrade setuptools
-RUN pip install jupyter
 RUN pip install -r requirements.txt
+# jupyter config
+RUN jupyter lab --generate-config
+RUN echo "c.NotebookApp.ip = '0.0.0.0'" >> /root/.jupyter/jupyter_lab_config.py
+RUN echo "c.NotebookApp.port = 8888" >> /root/.jupyter/jupyter_lab_config.py
+RUN echo "c.NotebookApp.token = ''" >> /root/.jupyter/jupyter_lab_config.py
+RUN echo "c.NotebookApp.allow_root = True" >> /root/.jupyter/jupyter_lab_config.py
+RUN echo "c.NotebookApp.open_browser = False" >> /root/.jupyter/jupyter_lab_config.py
 ```
 
 <br>
@@ -268,16 +285,18 @@ RUN pip install -r requirements.txt
 docker-compose.yml
 
 ```
-version: '3'
+version: '3.10'
 services:
-  python3:
+  python3-10:
     restart: always
     build: .
-    container_name: 'XXXX'
-    working_dir: /root/XXXX
+    container_name: 'venv'
+    working_dir: /root/
     tty: true
     volumes:
-      - /volumes_dir:/root/volume_dir
+      - ./work:/root/work
+    ports:
+      - "8888:8888"
 ```
 
 Dockerfikeやdocker-compose.ymlを置いている場所にrequirements.txtなども置いておく。
