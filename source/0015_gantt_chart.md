@@ -39,7 +39,9 @@ def make_dict(year_1, month_1, nweek1, span_week=1, start_offset=0, Task='task')
     dict_ = dict(Task=Task, Start=start_day1, Finish=end_day1,)  # ジョブの名称 # 開始日 # 終了日
     return dict_
 
-dict0 = make_dict(2023, 10, nweek1=2, span_week=1, start_offset=0, Task='タスク１')
+# 年と月、第何週から始まるか(nweek1)、期間は何週か(span_week)を引数とする
+# start_offsetはnweek1をずらすためにある(そのままだと第n週の途中から設定できないため)
+dict0 = make_dict(2023, 10, nweek1=2, span_week=1, start_offset=-0.5, Task='タスク１')
 dict1 = make_dict(2023, 10, nweek1=3, span_week=2, start_offset=0, Task='タスク２')
 dict2 = make_dict(2023, 10, nweek1=4, span_week=3, start_offset=0, Task='タスク３')
 dict3 = make_dict(2023, 11, nweek1=3, span_week=2, start_offset=0, Task='タスク４')
