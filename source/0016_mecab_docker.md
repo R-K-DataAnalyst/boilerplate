@@ -1,7 +1,4 @@
-# 週単位のガントチャート作成コード
-Docker。
-
-参考：
+# DockerでMecab備忘録
 
 [公式](https://github.com/neologd/mecab-ipadic-neologd#preparation-of-installing)
 <br>
