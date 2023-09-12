@@ -251,6 +251,7 @@ ENV LC_ALL ja_JP.UTF-8
 ENV TZ JST-9
 ENV TERM xterm
 
+RUN apt install sudo
 RUN apt install -y vim less
 RUN apt install -y --no-install-recommends graphviz
 RUN apt install -y fonts-ipaexfont
@@ -263,6 +264,16 @@ RUN ["/bin/bash", "-c", "source ~/.vimrc"]
 
 # for pymc
 RUN apt install libblas-dev -y
+# for mecab
+RUN apt install mecab -y
+RUN apt install libmecab-dev -y
+RUN apt install mecab-ipadic-utf8 -y
+RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git
+RUN mecab-ipadic-neologd/bin/install-mecab-ipadic-neologd -n -y
+RUN mv /usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd /var/lib/mecab/dic
+RUN mv /etc/mecabrc /etc/mecabrc_old
+RUN echo 'dicdir = /var/lib/mecab/dic/mecab-ipadic-neologd' >> /etc/mecabrc
+RUN cp /etc/mecabrc /usr/local/etc/
 
 RUN mkdir -p /root/work
 COPY requirements.txt /root/work

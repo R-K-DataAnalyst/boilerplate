@@ -1,0 +1,12 @@
+version: '3.10'
+services:
+  python3-10:
+    restart: always
+    build: .
+    container_name: 'kirienv'
+    working_dir: /root/
+    tty: true
+    volumes:
+      - ./work:/root/work
+    ports:
+      - "8888:8888"
