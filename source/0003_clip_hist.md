@@ -208,3 +208,30 @@ def plot_chart(y_km):
     ax.set_title('Cluster Chart (ALL Records:{})'.format(km_label['val'].sum()),fontsize=14)
     plt.show()
 ```
+(予測 - 実測) ÷ 実測の計算。計算後はsns.scatterplot()で可視化したり、表として出力したりご自由に。
+```python
+# (予測 - 実測) ÷ 実測
+period_ = list(np.round(np.linspace(-0.5,0.5,11), 3))
+dfresults = pd.read_csv("<FILE NAME>")  # 実測と予測のdf
+dfresults.columns=['true', 'pred']
+dfresults['diff'] = dfresults['pred'] - dfresults['true']  # 実測予測の差分
+dfresults['ratio'] = dfresults['diff'] / dfresults['true']  # 実測予測の差分を実測値で割る
+s_cut, bins = pd.cut(dfresults['ratio'], period_, right=False, retbins=True)  # 区切る
+labels=bins[:-1]  # 区切る
+s_cut = pd.cut(dfresults['ratio'], period_, right=False, labels=labels)  # 区切る
+dfresults['period']=s_cut.values  # 区切った区間を追加
+dfresults['period']=dfresults['period'].astype(str)
+dfresults['period']=dfresults['period'].astype(float)  # float型へ
+dfresults.loc[(dfresults['ratio']>=period_[-1])&(~(np.isinf(dfresults['ratio']))), 'period'] = period_[-1]+0.01
+dfresults.loc[(dfresults['ratio']<period_[0])&(~(np.isinf(dfresults['ratio']))), 'period'] = period_[0]-0.01
+dfresults.loc[(np.isinf(dfresults['ratio'])), 'period'] = 9999
+#dfresults.loc[(np.isposinf(dfresults['ratio'])), 'period'] = 9999
+#dfresults.loc[(np.isneginf(dfresults['ratio'])), 'period'] = -9999
+
+dfresultsPlot = dfresults.copy()
+rep = {i:str(n+1).zfill(2)+'_[{}, {})_DiffRatio'.format(round(i,3), round(i+0.1,3)) for n, i in enumerate(labels)}
+rep[period_[-1]+0.01] = str(len(labels)+1).zfill(2)+'_[{}, )_DiffRatio'.format(period_[-1])
+rep[period_[0]-0.01] = str(0).zfill(2)+'_[ , {})_DiffRatio'.format(period_[0])
+rep[9999] = 'inf'
+dfresultsPlot = dfresultsPlot.replace({'period':rep})
+```

@@ -194,6 +194,7 @@ murmurhash==1.0.9
 nbclient==0.8.0
 nbconvert==7.7.3
 nbformat==5.9.2
+neologdn==0.5.2
 nest-asyncio==1.5.7
 networkx==2.8.8
 ngboost==0.3.12
@@ -264,6 +265,7 @@ pydot==1.4.2
 pydotplus==2.0.2
 pygam==0.8.0
 Pygments==2.16.1
+pygraphviz==1.11
 PyJWT==2.8.0
 pymc==5.7.2
 pynndescent==0.5.10
