@@ -235,3 +235,32 @@ rep[period_[0]-0.01] = str(0).zfill(2)+'_[ , {})_DiffRatio'.format(period_[0])
 rep[9999] = 'inf'
 dfresultsPlot = dfresultsPlot.replace({'period':rep})
 ```
+
+分布見るとき、バイオリンプロットの方が見やすいかも。
+```python
+# num_cols:見たい連続値データのカラム名リスト
+dim = len(num_cols)
+fig=plt.figure(figsize=(18,18))
+for i, col in tqdm(enumerate(num_cols)):
+    tmp = df.copy()
+    tmp[col] = tmp[col].clip(tmp[col].quantile(0.0), tmp[col].quantile(0.99))
+    ax = plt.subplot(round(np.ceil(dim/np.sqrt(dim))), round(np.ceil(dim/np.sqrt(dim))), i+1)
+    sns.violinplot(data=tmp, y=col, ax=ax, hue=obj_col, split=True, inner="quart")  # , hue="alive", split=True, x='union_category_name'
+    ax.set_title(col, fontsize=8)
+    plt.setp(ax.get_xticklabels(), fontsize=8)
+    plt.setp(ax.get_yticklabels(), fontsize=8)
+    ax.set_xlabel('', fontsize=8)
+    ax.set_ylabel('dist', fontsize=8)
+    ax.legend(fontsize=8)
+plt.tight_layout()
+plt.show()
+
+'''
+fig = plt.figure(figsize=(15,5))
+# plt.rcParams['font.family'] = prop.get_name() #全体のフォントを設定
+ax = plt.subplot(1,1,1)
+sns.violinplot(data=df, y='column1', x='column2', ax=ax, hue='column2')  # hueカテゴリーごとに横軸に分布見られる
+plt.setp(ax.get_xticklabels(), rotation=30, ha='right')
+plt.show()
+'''
+```
