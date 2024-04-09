@@ -1,7 +1,8 @@
 FROM python:3.10
 USER root
 
-RUN apt update
+RUN apt -y update && apt -y upgrade
+RUN apt -y install libopencv-dev
 RUN apt -y install locales && \
     localedef -f UTF-8 -i ja_JP ja_JP.UTF-8
 

@@ -427,7 +427,7 @@ sat-search==0.1.0
 scikit-gstat==1.0.16
 scikit-image==0.22.0
 scikit-learn
-scipy
+scipy<1.13
 scs==3.2.3
 seaborn
 segregation==2.5
