@@ -251,9 +251,10 @@ ENV LC_ALL ja_JP.UTF-8
 ENV TZ JST-9
 ENV TERM xterm
 
-RUN apt install sudo
+RUN apt install -y sudo
 RUN apt install -y vim less
-RUN apt install -y --no-install-recommends graphviz
+#RUN apt install -y --no-install-recommends graphviz
+RUN apt install -y graphviz graphviz-dev
 RUN apt install -y fonts-ipaexfont
 # vim install and config
 RUN apt install -y vim-gtk3
@@ -313,3 +314,45 @@ services:
 Dockerfikeやdocker-compose.ymlを置いている場所にrequirements.txtなども置いておく。
 
 ![docker_files](0002_docker/docker_files.png)
+
+
+# Rインストールするとき
+`sudo apt update`  
+`sudo apt install -y r-base r-base-dev`  
+`sudo apt install -y r-base-dev`  
+`sudo apt install -y libharfbuzz-dev libfribidi-dev`  
+`sudo apt install -y libv8-dev`  
+`sudo apt install -y libudunits2-dev`  
+`sudo apt install -y libgdal-dev`  
+`sudo apt install -y libjq-dev`  
+`sudo apt install -y libprotobuf-dev`  
+`sudo apt install -y protobuf-compiler`  
+``  
+``  
+[Rのtidyverse パッケージのインストールでつまったので解決法をメモ](https://zenn.dev/kreutzer000/articles/87f6639e50d06b)  
+[Rstudioでrayshaderを表示するまでにやったこと](https://qiita.com/m37335/items/d7a31aaa2e2cdf7ba277)  
+[DockerでPythonにてGDALを利用する](https://zenn.dev/straydog/articles/a5c005cc7cfe22)  
+
+```r
+install.packages("tidyverse")
+install.packages("NipponMap")
+install.packages("sf")
+install.packages('raster')
+install.packages("here")
+install.packages("jpmesh")
+install.packages("devtools")
+install.packages("rmapshaper")
+install.packages("geojsonio")
+devtools::install_github("uribo/jpndistrict")
+install.packages("CARBayes")
+
+library(sf)
+library(NipponMap)
+library(RColorBrewer)
+library(raster)
+library(tidyverse)
+library(jpmesh)
+library(rmapshaper)
+library(geojsonsf)
+library(CARBayes)
+```
