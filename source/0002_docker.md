@@ -327,8 +327,8 @@ Dockerfikeやdocker-compose.ymlを置いている場所にrequirements.txtなど
 `sudo apt install -y libjq-dev`  
 `sudo apt install -y libprotobuf-dev`  
 `sudo apt install -y protobuf-compiler`  
-``  
-``  
+`sudo apt install -y r-cran-gsl`  
+`sudo apt install -y libgsl-dev`  
 [Rのtidyverse パッケージのインストールでつまったので解決法をメモ](https://zenn.dev/kreutzer000/articles/87f6639e50d06b)  
 [Rstudioでrayshaderを表示するまでにやったこと](https://qiita.com/m37335/items/d7a31aaa2e2cdf7ba277)  
 [DockerでPythonにてGDALを利用する](https://zenn.dev/straydog/articles/a5c005cc7cfe22)  
