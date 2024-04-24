@@ -94,9 +94,13 @@ print('f1_score', np.round(sklearn.metrics.f1_score(summary['stat_test'], summar
 <br>
 
 図  
+
 __`not`__`model.is_dconnected`だからd_separatedの場合Trueになると思う。`correlation_score`のsummaryのd_connectedはd_separatedの間違いではないか。  
 ![BayesianNW_d_separated](0024_bayesianNW/BayesianNW_d_separated.png)  
+https://pgmpy.org/_modules/pgmpy/metrics/metrics.html  
 
 図  
+
 boolean = True の場合、検定の p_value が significance_level より大きければ True を返し、そうでなければ False を返す。
-![BayesianNW_Chi_Squared](0024_bayesianNW/BayesianNW_Chi_Squared.png)
+![BayesianNW_Chi_Squared](0024_bayesianNW/BayesianNW_Chi_Squared.png)  
+https://pgmpy.org/_modules/pgmpy/estimators/CITests.html
