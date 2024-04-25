@@ -82,6 +82,65 @@ result_train = pd.DataFrame({'true':df['Y'].to_numpy(), 'pred':results})
 display(result_train.head())
 
 
+# 並列推論の実行
+print('All Loop Count', len(df))
+# Trainデータ推論(Parallel)
+# infer = VariableElimination(my_dag)
+infer = BeliefPropagation(my_dag)
+pred_values = Parallel(n_jobs=8)(
+    delayed(infer.query)(
+        variables=['Y'],
+        evidence=row.to_dict(),
+        show_progress=False,
+    )
+    for num, (index, row) in tqdm(enumerate(df.drop(columns=['Y']).iterrows()))
+)
+pred_values = np.array([obj.values[-1] for obj in tqdm(pred_values)])
+print(pred_values[:5])
+
+
+result_train = pd.DataFrame({'true':df['Y'].to_numpy(), 'pred':pred_values})
+display(result_train.head())
+
+# Trainデータ評価
+y_true = result_train['true'].to_numpy()
+y_pred_proba = result_train['pred'].to_numpy()
+y_pred = np.round(result_train['pred'].to_numpy())
+print(sklearn.metrics.classification_report(y_true, y_pred), '\n')
+cm = sklearn.metrics.confusion_matrix(y_true, y_pred)
+print('confusion matrix')
+print(cm, '\n')
+
+plt.hist(y_pred_proba, bins=20)
+plt.title('predict proba hist')
+plt.show()
+
+
+# TestについてTrainには無いカテゴリーはnanに変換しておく
+df_test2 = df_test.copy()
+df_test2_cols = df_test2.columns
+for i, col in tqdm(enumerate(df_test2_cols)):
+    df_test2.loc[(~df_test2[col].isin(list(df[col].unique()))), col] = np.nan
+display(df_test2)
+display(df_test2.isnull().sum())
+
+
+# Test推論(Parallel)
+print('All Loop Count', len(df_test2))
+# infer = VariableElimination(my_dag)
+infer = BeliefPropagation(my_dag)
+pred_values_test = Parallel(n_jobs=8)(
+    delayed(infer.query)(
+        variables=['Y'],
+        evidence=row.to_dict(),
+        show_progress=False,
+    )
+    for num, (index, row) in tqdm(enumerate(df_test2.drop(columns=['Y']).iterrows()))
+)
+pred_values_test = np.array([obj.values[-1] for obj in tqdm(pred_values_test)])
+print(pred_values_test[:5])
+
+
 # 評価
 # stat_test:データの相関の有無を正解値として評価. True=無相関, False=相関
 # d_connected:ネットワークのd_connected. True=d結合(相関), False=d分離(無相関)のはずだが、多分逆になっている気がする. True=d分離(無相関), False=d結合(相関)
