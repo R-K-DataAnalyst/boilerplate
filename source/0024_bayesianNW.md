@@ -125,19 +125,40 @@ display(df_test2)
 display(df_test2.isnull().sum())
 
 
-# Test推論(Parallel)
+# Test推論(Parallel)  
 print('All Loop Count', len(df_test2))
+# 推論したいノード(変数)以外のノードが欠損だった場合、そのノードも含めたCPDが出力されるイメージ（よって多次元配列が出る）
 # infer = VariableElimination(my_dag)
 infer = BeliefPropagation(my_dag)
-pred_values_test = Parallel(n_jobs=8)(
+obj_list_test = Parallel(n_jobs=1)(
     delayed(infer.query)(
-        variables=['Y'],
-        evidence=row.to_dict(),
+        variables=['Y']+row[pd.isna(row)].index.to_list(),  # 欠損ノードをvariablesに入れる
+        evidence=row[~pd.isna(row)].to_dict(),  # 欠損ノードはevidenceから抜く
         show_progress=False,
     )
     for num, (index, row) in tqdm(enumerate(df_test2.drop(columns=['Y']).iterrows()))
 )
-pred_values_test = np.array([obj.values[-1] for obj in tqdm(pred_values_test)])
+
+# 任意の軸の‐1番目を取得する関数
+def get_zero_index_element(arr, axis, idx=-1):
+    '''
+    arr = np.arange(96).reshape(3,4,2,4)  # 4dim
+    print('  dim ', arr.shape)
+    print('0 dim ', get_zero_index_element(arr, 0, idx=-1).shape)
+    print('1 dim ', get_zero_index_element(arr, 1, idx=-1).shape)
+    print('2 dim ', get_zero_index_element(arr, 2, idx=-1).shape)
+    print('3 dim ', get_zero_index_element(arr, 3, idx=-1).shape)
+    >>   dim  (3, 4, 2, 4)
+    >> 0 dim  (4, 2, 4)
+    >> 1 dim  (3, 2, 4)
+    >> 2 dim  (3, 4, 4)
+    >> 3 dim  (3, 4, 2)
+    '''
+    slices = [slice(None)] * arr.ndim
+    slices[axis] = idx
+    return arr[tuple(slices)]
+# 推論したいノード(変数)Y以外のノードが欠損だった場合、欠損じゃないときのノードYの確率のパターンがすべて出力されるので平均を取る
+pred_values_test = np.array([np.mean(get_zero_index_element(obj.values, obj.variables.index('Y'), idx=-1)) for obj in tqdm(obj_list_test)])
 print(pred_values_test[:5])
 
 
